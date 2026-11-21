@@ -12,7 +12,7 @@ An end-to-end interactive Business Intelligence project analyzing e-commerce sal
 
 ## 🔗 Live Interactive Dashboard
 
-[View the Live Dashboard Here](https://app.powerbi.com/view?r=eyJrIjoiN2F...)
+[View the Live Dashboard Here](https://app.powerbi.com/view?r=eyJrIjoiN2FmMWVhNGEtOTg4Yy00MmI5LTk0YjctODQ4MWFkNzE2MzhkIiwidCI6IjJiYjZlNWJjLWMxMDktNDdmYi05NDMzLWMxYzZmNGZhMzNmZiIsImMiOjl9)
 
 ---
 
