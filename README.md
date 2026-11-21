@@ -8,7 +8,7 @@
 ## 📌 Project Overview
 An end-to-end interactive Business Intelligence project analyzing e-commerce sales performance across **Nov 2025 – Apr 2026**, tracking net revenue, Average Order Value (**AOV**), order volume, unit sales, customer base, and product/category return rates. Starting from raw transactional data explored in **SQL** and cleaned in **Power Query** into a single-direction **Star Schema**, the solution combines **DAX** measures with an interactive **Power BI** dashboard styled with a clean dual-tone palette (**Charcoal/Grey** for `2025` and **Blue** for `2026`).
 
-![E-Commerce Sales & Performance Dashboard](E-Commerce%20Sales%20Performance%20Analytics.png)
+![E-Commerce Sales & Performance Dashboard](Dashboard.png)
 
 ## 🔗 Live Interactive Dashboard
 
@@ -62,7 +62,7 @@ Raw e-commerce records were audited and prepared before building the semantic mo
 - `ecommerce_orders.pbix` — Interactive Power BI Desktop report file including Star Schema model, DAX measures, and visuals.
 - `ecommerce_orders.csv` — E-commerce order-level dataset.
 - `ecommerce_orders.sql` — SQL queries for exploration and validation.
-- `E-Commerce Sales Performance Analytics.png` — High-resolution export of the final dashboard.
+- `Dashboard.png` — High-resolution export of the final dashboard.
 - `Data model.png` — Screenshot of the single-direction Star Schema data model.
 
 ---
