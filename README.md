@@ -6,9 +6,9 @@
 ![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## 📌 Project Overview
-An end-to-end interactive Business Intelligence project analyzing e-commerce sales performance across **2025 and 2026**, tracking net revenue, order volume, customer base, Year-over-Year (YoY) growth, and product/category return rates. Starting from raw transactional data explored in **SQL** and transformed in **Power Query** into a clean **Star Schema**, the solution combines **DAX** time-intelligence measures with an interactive **Power BI** dashboard styled with a consistent dual-tone color palette (**Blue** for `2025` and **Green** for `2026`) and a custom gradient header.
+An end-to-end interactive Business Intelligence project analyzing e-commerce sales performance across **Nov 2025 – Apr 2026**, tracking net revenue, Average Order Value (**AOV**), order volume, unit sales, customer base, and product/category return rates. Starting from raw transactional data explored in **SQL** and cleaned in **Power Query** into a single-direction **Star Schema**, the solution combines **DAX** measures with an interactive **Power BI** dashboard styled with a clean dual-tone palette (**Charcoal/Grey** for `2025` and **Blue** for `2026`).
 
-![E-Commerce Sales & Performance Dashboard](Dashboard.png)
+![E-Commerce Sales & Performance Dashboard](E-Commerce%20Sales%20Performance%20Analytics.png)
 
 ## 🔗 Live Interactive Dashboard
 
@@ -17,44 +17,44 @@ An end-to-end interactive Business Intelligence project analyzing e-commerce sal
 ---
 
 ## 📋 Dataset Scope & Coverage
-> **Data Overview:** This dataset contains e-commerce order-level records spanning **2025 and 2026**, enabling multi-year revenue tracking, seasonal trend comparison, return rate diagnostics, and SKU-level performance evaluation.
+> **Data Overview:** This dataset contains e-commerce order-level records spanning **Nov–Dec 2025** and **Jan–Apr 2026**, enabling cross-period revenue tracking, monthly trend analysis, return rate diagnostics across all product categories, and SKU-level performance evaluation.
 
 ### **Included Data Attributes:**
-- **Time & Calendar Dimensions:** Order dates mapped to a dedicated calendar table (`dim_date`) covering *Year, Quarter, and Month* for chronological analysis and Year-to-Date / Prior-Year comparisons.
-- **Product & Category Hierarchy:** Product names/SKUs and categories (*Electronics, Apparel, Home, Sports, Toys, Beauty*) linked through `dim_products`.
-- **Customer & Order Records:** Order identifiers, customer counts (`dim_customers`), quantities sold, gross sales (`Total Sales`), net revenue (`Net Sales`), and return indicators (`fact_orders`).
+- **Time & Calendar Dimensions:** Standardized order dates mapped to a dedicated calendar table (`dim_date`) covering *Year, Quarter, and Month* for accurate chronological analysis and Year-to-Date (`Sales YTD`) tracking.
+- **Product & Category Hierarchy:** Product names/SKUs and all six categories (*Electronics, Apparel, Home, Sports, Toys, Beauty*) linked through `dim_products`.
+- **Customer, Segment & Order Records:** Order identifiers, customer segments and counts (`dim_customers`), quantities sold, gross sales (`Total Sales`), net revenue (`Net Sales`), Average Order Value (`AOV`), and return indicators (`fact_orders`).
 
 ---
 
 ## 🧹 Data Cleaning & Transformation (SQL & Power Query)
-Raw e-commerce records were inspected and prepared before building the semantic model:
-- **SQL Exploration & Metric Validation:** Queried raw transactional data in `ecommerce_orders.sql` to verify date coverage (`2025–2026`), order counts, pricing/quantity fields, and return behavior, cross-checking baseline KPIs prior to reporting.
-- **Star Schema Normalization:** Restructured the raw data in **Power Query** into a clean **Star Schema** comprising `fact_orders` connected via one-to-many (`1:*`) single-direction relationships to `dim_date`, `dim_products`, and `dim_customers`.
-- **Handling Blank & Null Values:** Filtered out `(Blank)` entries across date attributes (*Year, Month, Quarter*) and categories to prevent blank slicer options and visual clutter.
-- **Data Types & Calendar Enrichment:** Standardized numeric, currency, percentage, and date types, and configured month/quarter sorting so time-series charts display in true chronological order.
+Raw e-commerce records were audited and prepared before building the semantic model:
+- **SQL Exploration & Metric Validation:** Queried raw transactional data in `ecommerce_orders.sql` to verify date coverage (`2025–2026`), order counts, pricing/quantity fields, segment/category standardization, and return behavior prior to reporting.
+- **Mixed Date Format Resolution (Power Query):** Resolved inconsistent date formats (`YYYY-MM-DD`, `DD/MM/YYYY`, and `MM/DD/YYYY`) by grouping records by `order_id` to propagate valid order dates across multi-line orders without fabricating missing dates.
+- **Transparent Handling of Missing Order Dates:** Preserved orders lacking raw dates in headline KPI totals (`$233.12K` Net Sales) while excluding `$25.31K` (`10.86%`) from time-based visuals (`Net Sales by Quarter` showing `$207.81K`) with clear dashboard annotation.
+- **Star Schema Normalization:** Restructured the data in **Power Query** into a clean **Star Schema** comprising `fact_orders` connected via one-to-many (`1:*`) single-direction relationships to `dim_date`, `dim_products`, and `dim_customers`.
 
-![Data Model](Data%20Model.png)
+![Data Model](Data%20model.png)
 
 ---
 
 ## 📐 DAX Modeling & Visualization (Power BI)
-1. **DAX Measures & Time Intelligence:**
-  - Built core KPI measures including `Total Sales`, `Net Sales` (`$233.12K`), `Total Orders` (`3K`), `Total Qty Sold` (`7K`), `Num of Customers` (`539`), and `Return Rate` (`5.76%`).
-  - Implemented time-intelligence measures (`Sales YTD`, `Sales PY`, and `YoY %`) to benchmark **2026** performance against **2025**.
+1. **DAX Measures & KPIs:**
+  - Built core KPI measures including `Net Sales` (`$233.12K`), `AOV` (`$88.34`), `Total Orders` (`2.8K`), `Total Qty Sold` (`6.93K`), `Num of Customers` (`539`), and `Return Rate` (`5.76%`).
+  - Implemented `Sales YTD` alongside yearly performance metrics to track **2025** (`$69,970.50` across `838` dated orders) and **2026** (`$120,481.09` across `1,457` dated orders).
 2. **Executive Dashboard Design:**
-  - Structured the canvas with 6 top KPI cards, a multi-year monthly trend chart (`Total Sales by Year and Month`), category and product performance visuals, a quarterly donut chart (`Net Sales by Quarter`), and a yearly comparison table.
-  - Integrated four interactive slicers (*Category, Year, Month, and Quarter*) alongside a transparent gradient title header.
+  - Structured the canvas with 6 logically ordered KPI cards (`Net Sales`, `AOV`, `Total Orders`, `Total Qty Sold`, `Num of Customers`, `Return Rate`), a monthly trend area chart (`Total Sales by Year and Month`), full-category sales and return rate visuals, a quarterly donut chart (`Net Sales by Quarter`), a top-products table, and a yearly summary table.
+  - Integrated five interactive slicers (*Segment, Category, Year, Month, and Quarter*) for multi-dimensional slicing.
 
 ---
 
 ## 📊 Key Insights
 | Metric / Dimension | Key Finding |
 | :--- | :--- |
-| **Overall Performance** | Net Sales reached **$233.12K** across **3K** orders (**7K** units sold) and **539** customers, with an overall **5.76%** return rate. |
-| **YoY Growth (2026 vs. 2025)** | Net Sales rose **199.5% YoY** from **$71,582.16** (**856** orders) in **2025** to **$140,331.75** (**1,698** orders) in **2026**. |
-| **Quarterly Concentration** | **Q1** accounts for **52.27%** of net sales and **Q4** contributes **33.89%**, driving the majority of revenue momentum. |
-| **Top Categories** | **Electronics** leads net sales at **$75K**, followed by **Apparel ($56K)**, **Home ($35K)**, and **Sports ($27K)**. |
-| **Return Rate & Top SKU** | **Toys (7.88%)** and **Sports (6.59%)** show the highest category return rates; **Phone Case** has an **8.27%** return rate, while **Wireless Earbuds** leads product net sales at **$14,355.58** (**4.56%** return rate). |
+| **Overall Performance** | Net Sales reached **$233.12K** at an **$88.34 AOV** across **2.8K** orders (**6.93K** units sold) and **539** customers, with a **5.76%** overall return rate. |
+| **Monthly & Period Trajectory** | Sales peaked in **Dec 2025 ($65.86K)** following **Nov 2025 ($14.84K)**, while **2026** grew steadily from **Jan ($32.59K)** and **Feb ($35.74K)** to a **Mar peak ($43.74K)** before **Apr ($27.71K)**. |
+| **Quarterly Concentration** | Among dated orders (**$207.81K**), **Q1** accounts for **50.73%** of net sales, **Q4** contributes **36.59%**, and **Q2** represents **12.67%**. |
+| **Category Sales Ranking** | **Electronics** leads net sales at **$75K**, followed by **Apparel ($56K)**, **Home ($35K)**, **Sports ($27K)**, **Toys ($21K)**, and **Beauty ($19K)**. |
+| **Return Rate & Top SKUs** | **Toys (7.88%)** and **Sports (6.59%)** record the highest category return rates while **Beauty** maintains the lowest (**3.71%**); **Phone Case** has an **8.27%** return rate, whereas **Wireless Earbuds** leads product net sales at **$14,355.58** (**4.56%** return rate). |
 
 ---
 
@@ -62,8 +62,8 @@ Raw e-commerce records were inspected and prepared before building the semantic 
 - `ecommerce_orders.pbix` — Interactive Power BI Desktop report file including Star Schema model, DAX measures, and visuals.
 - `ecommerce_orders.csv` — E-commerce order-level dataset.
 - `ecommerce_orders.sql` — SQL queries for exploration and validation.
-- `Dashboard.png` — High-resolution export of the final dashboard.
-- `Data Model.png` — Screenshot of the Star Schema data model.
+- `E-Commerce Sales Performance Analytics.png` — High-resolution export of the final dashboard.
+- `Data model.png` — Screenshot of the single-direction Star Schema data model.
 
 ---
 
