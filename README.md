@@ -59,9 +59,10 @@ Raw e-commerce records were audited and prepared before building the semantic mo
 ---
 
 ## 📂 Repository Structure
-- `ecommerce_orders.pbix` — Interactive Power BI Desktop report file including Star Schema model, DAX measures, and visuals.
-- `ecommerce_orders.csv` — E-commerce order-level dataset.
+- `ecommerce_orders_uncleaned.csv` — Raw e-commerce order-level dataset prior to cleaning.
+- `ecommerce_orders_cleaned.xlsx` — Cleaned e-commerce dataset prepared for modeling and analysis.
 - `ecommerce_orders.sql` — SQL queries for exploration and validation.
+- `ecommerce_orders.pbix` — Interactive Power BI Desktop report file including Star Schema model, DAX measures, and visuals.
 - `Dashboard.png` — High-resolution export of the final dashboard.
 - `Data model.png` — Screenshot of the single-direction Star Schema data model.
 
